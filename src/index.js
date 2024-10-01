@@ -1,11 +1,14 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+//const express = require('express');
+//const app = express();
+//const port = 3000;
+import { pool } from "./database/connectionPostgreSQL.js"
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-})
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-})
+const getLibro= async ()=>{
+    try{
+        const result = await pool.query(`SELECT * FROM "LIBRO"`)
+        console.log(result)
+    }catch(error){
+        console.error(error)
+    }
+}
+getLibro();
