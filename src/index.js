@@ -1,14 +1,8 @@
-//const express = require('express');
-//const app = express();
-//const port = 3000;
-import { pool } from "./database/connectionPostgreSQL.js"
+import express from 'express'
+ import bookRoutes from './routes/book-routes.js'
+ const app = express();
 
-const getLibro= async ()=>{
-    try{
-        const result = await pool.query(`SELECT * FROM "LIBRO"`)
-        console.log(result)
-    }catch(error){
-        console.error(error)
-    }
-}
-getLibro();
+ app.use(bookRoutes);
+ app.listen(3000, () => {
+    console.log('Servidor corriendo en el puerto 3000')
+ })
