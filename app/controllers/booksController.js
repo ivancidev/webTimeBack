@@ -1,4 +1,4 @@
-const bookModel = require('../models/bookModel');
+const bookModel = require('../services/bookModel');
 
 const addBook = async (req, res) => {
     const { titulo, autor, categoria, idioma, sinopsis } = req.body;
