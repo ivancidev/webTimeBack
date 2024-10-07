@@ -1,6 +1,3 @@
-
-// connectionPostgreSQL.js
-
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -19,4 +16,4 @@ pool.on('error', (err) => {
   console.error('Error en la conexión a la base de datos:', err);
 });
 
-module.exports = pool; // Exporta el pool directamente
+module.exports = pool; 
