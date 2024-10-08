@@ -1,9 +1,9 @@
 import express from 'express'
-import { getIdiomas, getAutores, getCategorias } from '../controllers/book-controller.js'
+import { getLanguages, getAuthors, getCategories } from '../controllers/book-controller.js'
 
 const router = express.Router();
 
-router.get('/idiomas', getIdiomas);
-router.get('/autores', getAutores);
-router.get('/categorias', getCategorias);
+router.get('/languages', getLanguages);
+router.get('/authors', getAuthors);
+router.get('/categories', getCategories);
 export default router;

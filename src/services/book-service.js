@@ -1,5 +1,5 @@
 import { pool } from "../database/connectionPostgreSQL.js"
-export const getNombreAutor= async ()=>{
+export const getNameAuthors= async ()=>{
     try{
         const result = await pool.query(`select autor from autor`)
         console.log(result.rows)
@@ -8,7 +8,7 @@ export const getNombreAutor= async ()=>{
         console.error(error)
     }
 }
-export const getNombreCategoria= async ()=>{
+export const getNameCategories= async ()=>{
     try{
         const result = await pool.query(`select categoria from categoria`)
         console.log(result.rows)
@@ -17,7 +17,7 @@ export const getNombreCategoria= async ()=>{
         console.error(error)
     }
 }
-export const getNombreIdioma= async ()=>{
+export const getNameLanguages= async ()=>{
     try{
         const result = await pool.query(`select idioma from idioma`)
         console.log(result.rows)
