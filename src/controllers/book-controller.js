@@ -35,42 +35,52 @@ const getCategories = async (req, res) => {
   }
 };
 
-const addBook = async (req, res) => {
-  const { titulo, autor, categoria, idioma, sinopsis } = req.body;
-  console.log("Datos del libro recibidos:", {
-    titulo,
-    autor,
-    categoria,
-    idioma,
-    sinopsis,
-  });
+const uploadBook = async (req, res) => {
+    try {
+        const { nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma } = req.body;
+        
+        // Obtener los archivos de la solicitud
+        const archivoPDF = req.files['archivoPDF'] ? req.files['archivoPDF'][0].buffer : null;
+        const archivoAudio = req.files['archivoAudio'] ? req.files['archivoAudio'][0].buffer : null;
+        const archivoPortada = req.files['archivoPortada'] ? req.files['archivoPortada'][0].buffer : null;
 
-  try {
-    const codAutor = await getAutorByNombre(autor);
+        // Llamada al servicio para insertar los datos del libro
+        const nuevoLibro = await insertBook({
+            nombreLibro,
+            sinopsis,
+            enlaceLibro,
+            enlaceAudio,
+            enlacePortada,
+            codAutor,
+            codCategoria,
+            codIdioma,
+            archivoPDF,
+            archivoAudio,
+            archivoPortada
+        });
 
-    if (!codAutor) return res.status(400).send("Autor no encontrado");
-
-    const codCategoria = await getCategoriaByNombre(categoria);
-
-    if (!codCategoria) return res.status(400).send("Categoría no encontrada");
-
-    const codIdioma = await getIdiomaByNombre(idioma);
-
-    if (!codIdioma) return res.status(400).send("Idioma no encontrado");
-
-    const result = await insertBook(
-      titulo,
-      sinopsis,
-      codAutor,
-      codCategoria,
-      codIdioma
-    );
-
-    res.status(201).send("Libro agregado correctamente");
-  } catch (error) {
-    console.error("Error al insertar libro:", error);
-    res.status(500).send("Error al agregar el libro");
-  }
+        res.status(201).json(nuevoLibro);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al subir los archivos del libro' });
+    }
 };
 
-module.exports = { getAuthors, getLanguages, getCategories, addBook };
+
+const getBookPDF = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el id del libro desde la URL
+        const libro = await getBookById(id); // Llamar al servicio para obtener el libro desde la BD
+
+        if (!libro || !libro.archivoPDF) {
+            return res.status(404).json({ error: 'Archivo PDF no encontrado' });
+        }
+
+        res.set('Content-Type', 'application/pdf'); // Configurar el tipo de contenido
+        res.send(libro.archivoPDF); // Enviar el archivo PDF
+    } catch (error) {
+        console.error('Error al obtener el archivo PDF:', error);
+        res.status(500).json({ error: 'Error al obtener el archivo PDF' });
+    }
+};
+module.exports = { getAuthors, getLanguages, getCategories, addBook, uploadBook, getBookPDF };
