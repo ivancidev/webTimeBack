@@ -4,11 +4,16 @@ const {
   getNameCategories,
   insertBook,
 } = require("../services/book-service");
+
+
+
 const multer = require('multer');
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 100 * 1024 * 1024 } // 100 MB
+});
 const uploadMiddleware = upload.fields([
     { name: 'archivoPDF', maxCount: 1 },
     { name: 'archivoAudio', maxCount: 1 },
@@ -43,6 +48,14 @@ const getCategories = async (req, res) => {
 };
 
 const uploadBook = async (req, res) => {
+
+
+
+    console.log("################################################")
+    console.log("req.files:", req.files);
+  console.log("req.body:", req.body);
+    
+    
     try {
         const { nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma } = req.body;
         
@@ -50,6 +63,11 @@ const uploadBook = async (req, res) => {
         const archivoPDF = req.files['archivoPDF'] ? req.files['archivoPDF'][0].buffer : null;
         const archivoAudio = req.files['archivoAudio'] ? req.files['archivoAudio'][0].buffer : null;
         const archivoPortada = req.files['archivoPortada'] ? req.files['archivoPortada'][0].buffer : null;
+
+
+        /*if (!archivoPDF || !archivoAudio || !archivoPortada) {
+            return res.status(400).json({ error: 'Se requieren los tres archivos: PDF, audio y portada.' });
+        }*/
 
         // Llamada al servicio para insertar los datos del libro
         const nuevoLibro = await insertBook({
@@ -65,11 +83,11 @@ const uploadBook = async (req, res) => {
             archivoAudio,
             archivoPortada
         });
-
+        
         res.status(201).json(nuevoLibro);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Error al subir los archivos del libro' });
+        res.status(500).json({ error: 'Error cheee al subir los archivos del libro' });
     }
 };
 

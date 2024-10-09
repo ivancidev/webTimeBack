@@ -7,11 +7,15 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// Aplica primero las rutas que usan Multer
 app.use("/", router);
 app.use('/public', express.static('public'));
+
+// Luego aplica los body parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Pruebas de alvin
 app.get("/base", async (req, res) => {

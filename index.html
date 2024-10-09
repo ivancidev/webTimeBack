@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prueba de carga de archivos</title>
+</head>
+<body>
+  <form action="http://localhost:3000/subirLibro" method="post" enctype="multipart/form-data">
+    <label>Nombre del Libro:</label>
+    <input type="text" name="nombreLibro"><br><br>
+    <label>Sinopsis:</label>
+    <input type="text" name="sinopsis"><br><br>
+    <label>Código del Autor:</label>
+    <input type="text" name="codAutor"><br><br>
+    <label>Código de la Categoría:</label>
+    <input type="text" name="codCategoria"><br><br>
+    <label>Código del Idioma:</label>
+    <input type="text" name="codIdioma"><br><br>
+    <label>Archivo PDF:</label>
+    <input type="file" name="archivoPDF"><br><br>
+    <label>Archivo Audio:</label>
+    <input type="file" name="archivoAudio"><br><br>
+    <label>Archivo Portada:</label>
+    <input type="file" name="archivoPortada"><br><br>
+    <input type="submit" value="Subir Archivos">
+  </form>
+</body>
+</html>

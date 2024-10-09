@@ -81,7 +81,7 @@ const getIdiomaByNombre = async (nombreIdioma) => {
 const insertBook = async ({ nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada }) => {
     try {
         const result = await pool.query(
-            `INSERT INTO libro (nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada)
+            `INSERT INTO libro ("nombreLibro", "sinopsis", "enlaceLibro", "enlaceAudio", "enlacePortada", "codAutor", "codCategoria", "codIdioma", "archivoPDF", "archivoAudio", "archivoPortada")
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
             [nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada]
         );
