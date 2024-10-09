@@ -69,7 +69,6 @@ const getIdiomaByNombre = async (nombreIdioma) => {
     if (idiomaResult.rows.length === 0) {
       return null;
     }
-<<<<<<< HEAD
     return idiomaResult.rows[0].codIdioma;
   } catch (error) {
     console.error("Error al obtener el idioma:", error);
@@ -77,40 +76,9 @@ const getIdiomaByNombre = async (nombreIdioma) => {
   }
 };
 
-const insertBook = async (
-  nombreLibro,
-  sinopsis,
-  codAutor,
-  codCategoria,
-  codIdioma
-) => {
-  try {
-    const result = await pool.query(
-      `INSERT INTO "libro" ("nombreLibro", "sinopsis", "codAutor", "codCategoria", "codIdioma") 
-             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [nombreLibro, sinopsis, codAutor, codCategoria, codIdioma]
-    );
-    return result.rows[0];
-  } catch (error) {
-    console.error("Error al insertar el libro:", error);
-    throw error;
-  }
-};
-
-module.exports = {
-  getNameAuthors,
-  getNameCategories,
-  getNameLanguages,
-  getAutorByNombre,
-  getCategoriaByNombre,
-  getIdiomaByNombre,
-  insertBook,
-};
-=======
-}
 
 
-export const insertBook = async ({ nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada }) => {
+const insertBook = async ({ nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada }) => {
     try {
         const result = await pool.query(
             `INSERT INTO libro (nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada)
@@ -124,7 +92,7 @@ export const insertBook = async ({ nombreLibro, sinopsis, enlaceLibro, enlaceAud
         throw error;
     }
 };
-export const getBookById = async (id) => {
+const getBookById = async (id) => {
     try {
         const result = await pool.query('SELECT * FROM libro WHERE codLibro = $1', [id]);
         return result.rows[0];
@@ -133,4 +101,15 @@ export const getBookById = async (id) => {
         throw error;
     }
 };
->>>>>>> origin/datosConEndpointsYsubirLibro
+
+module.exports = {
+  getNameAuthors,
+  getNameCategories,
+  getNameLanguages,
+  getAutorByNombre,
+  getCategoriaByNombre,
+  getIdiomaByNombre,
+  insertBook,
+  getBookById
+};
+

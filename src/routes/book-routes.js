@@ -1,24 +1,20 @@
-<<<<<<< HEAD
-const express = require('express');
-const { getAuthors, getCategories, getLanguages, addBook } = require('../controllers/book-controller');
-=======
-import express from 'express'
-import { getLanguages, getAuthors, getCategories, uploadBook, uploadMiddleware, getBookPDF } from '../controllers/book-controller.js'
->>>>>>> origin/datosConEndpointsYsubirLibro
+const express = require("express");
+const {
+  getAuthors,
+  getCategories,
+  getLanguages,
+  uploadBook,
+  uploadMiddleware,
+  getBookPDF,
+} = require("../controllers/book-controller");
 
 const router = express.Router();
 
-router.post("/books", addBook);
-router.get('/languages', getLanguages);
-router.get('/authors', getAuthors);
-router.get('/categories', getCategories);
-<<<<<<< HEAD
+// router.post("/books", uploadBook);
+router.get("/languages", getLanguages);
+router.get("/authors", getAuthors);
+router.get("/categories", getCategories);
+router.get("/:id/archivoPDF", getBookPDF);
+router.post("/subirLibro", uploadMiddleware, uploadBook);
 
 module.exports = router;
-=======
-router.get('/:id/archivoPDF', getBookPDF); 
-
-router.post('/subirLibro', uploadMiddleware, uploadBook);
-
-export default router;
->>>>>>> origin/datosConEndpointsYsubirLibro
