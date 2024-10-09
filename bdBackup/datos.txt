@@ -1,0 +1,29 @@
+//Categorias
+    INSERT INTO categoria ("nombreCategoria")
+    VALUES 	('Lenguajes de programación'),
+		    ('Front-end'),
+		    ('Back-end'),
+		    ('Desarrollo Full-stack'),
+		    ('DevOps y despliegue'),
+		    ('Metodologías y mejores prácticas'),
+		    ('Diseño de interfaces y experiencia de usuario (UI/UX)');
+
+//Autores
+INSERT INTO autor ("nombreAutor")
+VALUES  ('Celi Párraga Ricardo Javier'),
+        ('Boné Andrade Miguel Fabricio'),
+        ('Mora Olivero Aldo Patricio'),
+        ('Ricardo Adan Sals Salas'),
+        ('Marijn Haverbeke'),
+        ('Pello Xavier Altadill Izura'),
+        ('Jon Duckett'),
+        ('Jon Duckett'),
+        ('David Flanagan'),
+        ('Ethan Marcotte'),
+        ('Kyle Simpson'),
+        ('Eric A. Meyer'),
+        ('Nicholas C. Zakas'),
+        ('Addy Osmani'),
+        ('Lea Verou'),
+        ('Jeffrey Zeldman');
+

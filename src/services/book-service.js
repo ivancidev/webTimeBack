@@ -69,6 +69,7 @@ const getIdiomaByNombre = async (nombreIdioma) => {
     if (idiomaResult.rows.length === 0) {
       return null;
     }
+<<<<<<< HEAD
     return idiomaResult.rows[0].codIdioma;
   } catch (error) {
     console.error("Error al obtener el idioma:", error);
@@ -105,3 +106,31 @@ module.exports = {
   getIdiomaByNombre,
   insertBook,
 };
+=======
+}
+
+
+export const insertBook = async ({ nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada }) => {
+    try {
+        const result = await pool.query(
+            `INSERT INTO libro (nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+            [nombreLibro, sinopsis, enlaceLibro, enlaceAudio, enlacePortada, codAutor, codCategoria, codIdioma, archivoPDF, archivoAudio, archivoPortada]
+        );
+        console.log(result.rows[0]);
+        return result.rows[0];
+    } catch (error) {
+        console.error('Error al insertar libro:', error);
+        throw error;
+    }
+};
+export const getBookById = async (id) => {
+    try {
+        const result = await pool.query('SELECT * FROM libro WHERE codLibro = $1', [id]);
+        return result.rows[0];
+    } catch (error) {
+        console.error('Error al obtener el libro por ID:', error);
+        throw error;
+    }
+};
+>>>>>>> origin/datosConEndpointsYsubirLibro

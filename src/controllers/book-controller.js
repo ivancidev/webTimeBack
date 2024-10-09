@@ -76,11 +76,3 @@ const getBookPDF = async (req, res) => {
             return res.status(404).json({ error: 'Archivo PDF no encontrado' });
         }
 
-        res.set('Content-Type', 'application/pdf'); // Configurar el tipo de contenido
-        res.send(libro.archivoPDF); // Enviar el archivo PDF
-    } catch (error) {
-        console.error('Error al obtener el archivo PDF:', error);
-        res.status(500).json({ error: 'Error al obtener el archivo PDF' });
-    }
-};
-module.exports = { getAuthors, getLanguages, getCategories, addBook, uploadBook, getBookPDF };
