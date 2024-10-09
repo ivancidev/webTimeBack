@@ -2,11 +2,18 @@ const {
   getNameAuthors,
   getNameLanguages,
   getNameCategories,
-  getAutorByNombre,
-  getIdiomaByNombre,
-  getCategoriaByNombre,
   insertBook,
 } = require("../services/book-service");
+const multer = require('multer');
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const uploadMiddleware = upload.fields([
+    { name: 'archivoPDF', maxCount: 1 },
+    { name: 'archivoAudio', maxCount: 1 },
+    { name: 'archivoPortada', maxCount: 1 }
+]);
 
 const getAuthors = async (req, res) => {
   try {
@@ -83,4 +90,4 @@ const getBookPDF = async (req, res) => {
     }
 };
 
-module.exports = { getAuthors, getLanguages, getCategories, addBook, uploadBook, getBookPDF };
+module.exports = { getAuthors, getLanguages, getCategories, uploadBook, getBookPDF, uploadMiddleware };
