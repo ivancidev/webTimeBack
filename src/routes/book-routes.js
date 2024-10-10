@@ -10,7 +10,6 @@ const {
 
 const router = express.Router();
 
-// router.post("/books", uploadBook);
 router.get("/languages", getLanguages);
 router.get("/authors", getAuthors);
 router.get("/categories", getCategories);
