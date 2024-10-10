@@ -3,6 +3,7 @@ const {
   getNameLanguages,
   getNameCategories,
   insertBook,
+  getAllBooks 
 } = require("../services/book-service");
 
 
@@ -108,4 +109,13 @@ const getBookPDF = async (req, res) => {
     }
 };
 
-module.exports = { getAuthors, getLanguages, getCategories, uploadBook, getBookPDF, uploadMiddleware };
+const getBooks = async (req, res) => {
+  try {
+    const libros = await getAllBooks();
+    res.json({ libros });
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener libros" });
+  }
+};
+
+module.exports = { getAuthors, getLanguages, getCategories, uploadBook, getBookPDF, uploadMiddleware, getBooks };

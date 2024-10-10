@@ -102,6 +102,16 @@ const getBookById = async (id) => {
     }
 };
 
+const getAllBooks = async () => {
+  try {
+      const result = await pool.query('SELECT "nombreLibro", "archivoPortada" FROM libro');
+      return result.rows;
+  } catch (error) {
+      console.error('Error al obtener todos los libros:', error);
+      throw error;
+  }
+};    
+
 module.exports = {
   getNameAuthors,
   getNameCategories,
@@ -110,6 +120,7 @@ module.exports = {
   getCategoriaByNombre,
   getIdiomaByNombre,
   insertBook,
-  getBookById
+  getBookById,
+  getAllBooks
 };
 
